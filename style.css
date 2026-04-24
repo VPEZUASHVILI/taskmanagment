@@ -1,0 +1,276 @@
+/* ფერების პალიტრის მოდერნიზაცია */
+:root {
+    --bs-primary: #6366f1; /* Modern Indigo */
+    --bs-primary-rgb: 99, 102, 241;
+    --navbar-dark: #111827; /* Deep Slate */
+}
+
+body { 
+    background-color: #f8f9fa; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar.bg-primary {
+    background-color: var(--navbar-dark) !important;
+}
+
+.main-content {
+    padding-bottom: 50px;
+}
+
+.card {
+    transition: transform 0.2s;
+    border-radius: 10px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.sidebar-btn {
+    font-size: 0.85rem;
+    font-weight: 500;
+    border-radius: 8px;
+    min-height: 62px; /* უზრუნველყოფს ღილაკის ზომის სტაბილურობას */
+    transition: all 0.2s ease;
+}
+
+.sidebar-btn:disabled {
+    cursor: not-allowed;
+    background-color: var(--bs-tertiary-bg);
+}
+
+.border-4 {
+    border-width: 4px !important;
+}
+
+.table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse; /* შევცვალე separate-დან collapse-ზე */
+    /* border-spacing: 0 8px; */ /* აღარ გვჭირდება collapse-ისას */
+}
+
+.table thead th {
+    border: none;
+    color: #6c757d;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    padding: 12px 15px;
+}
+
+.table td, .table th {
+    vertical-align: middle;
+    border-bottom: 1px solid var(--bs-border-color); /* დავამატე ქვედა ხაზი */
+    border-top: none; /* მოვაშორე ზედა ხაზი */
+    padding: 15px !important;
+    word-wrap: break-word; /* ტექსტის გადატანა ახალ ხაზზე */
+}
+
+.table tbody tr {
+    background-color: var(--bs-body-bg);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    transition: all 0.2s ease;
+    /* border-radius: 10px; */ /* აღარ გვჭირდება collapse-ისას */
+}
+
+.table tbody tr:hover {
+    transform: scale(1.005);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    background-color: var(--bs-tertiary-bg);
+}
+
+/* მოვაშორე მომრგვალება, რადგან collapse-ისას არ მუშაობს */
+
+/* სვეტების სიგანეების განსაზღვრა */
+.table th:nth-child(1) { width: 50px; }  /* ID */
+.table th:nth-child(2) { width: 15%; }  /* დავალება */
+.table th:nth-child(3) { width: 12%; }  /* დამკვეთი */
+.table th:nth-child(4) { width: 18%; }  /* საჭიროებები */
+.table th:nth-child(5) { width: 15%; }  /* კომენტარი */
+.table th:nth-child(6) { width: 115px; } /* დედლაინი */
+.table th:nth-child(7) { width: 12%; }  /* შემსრულებელი */
+.table th:nth-child(8) { width: 110px; } /* სტატუსი */
+.table th:nth-child(9) { width: 190px; } /* მოქმედება (ღილაკების სივრცე) */
+
+/* პილულა სტატუსისთვის */
+.badge.rounded-pill {
+    padding: 0.4em 0.8em;
+    font-size: 0.75em;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.status-done { 
+    text-decoration: line-through; 
+    opacity: 0.6;
+}
+
+/* მუქ რეჟიმში ტექსტის ფერის კორექცია */
+[data-bs-theme="dark"] .status-done {
+    color: #adb5bd;
+}
+
+/* ძებნის შედეგის განათება */
+.highlight {
+    background-color: #fef08a; /* ნაზი ყვითელი */
+    color: #000;
+    padding: 0 2px;
+    border-radius: 2px;
+}
+
+.text-danger.fw-bold {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* Login Page Styles */
+.login-container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at top left, #1f2937, #111827);
+}
+
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    background: white;
+    padding: 2.5rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+    /* ნაზი ანიმაციის დამატება */
+    animation: loginAppear 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes loginAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.login-icon-wrapper {
+    width: 60px;
+    height: 60px;
+    background: rgba(99, 102, 241, 0.1);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    font-size: 1.8rem;
+}
+
+.login-card .form-control {
+    border-radius: 10px;
+    padding: 0.6rem 1rem;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+}
+
+.login-card .form-control:focus {
+    background-color: white !important;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+}
+
+.login-card .input-group-text {
+    border-radius: 10px 0 0 10px;
+}
+
+/* სტატისტიკის სექციის ანიმაცია */
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.stats-fade-in {
+    animation: slideInDown 0.4s ease-out forwards;
+}
+
+/* სტატისტიკის ბარათების მუქი თემა (Dark Mode) */
+#statisticsSection .card {
+    background-color: #212529; /* მუქი ნაცრისფერი ფონი */
+    color: #f8f9fa; /* თითქმის თეთრი ტექსტი */
+    border: 1px solid #373b3e; /* მსუბუქი კანტი */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+#statisticsSection .text-muted {
+    color: #adb5bd !important; /* ღია ნაცრისფერი მცირე ტექსტებისთვის */
+}
+
+/* პრიორიტეტის ფერები */
+.priority-high {
+    border-left: 5px solid #dc3545; /* წითელი */
+}
+
+.priority-medium {
+    border-left: 5px solid #ffc107; /* ნარინჯისფერი */
+}
+
+.priority-low {
+    border-left: 5px solid #198754; /* მწვანე */
+}
+
+/* მუქი რეჟიმის ადაპტაცია */
+[data-bs-theme="dark"] .priority-high {
+    border-left-color: #dc3545;
+}
+[data-bs-theme="dark"] .priority-medium {
+    border-left-color: #ffc107;
+}
+[data-bs-theme="dark"] .priority-low {
+    border-left-color: #198754;
+}
+
+/* კანბანის სტილები */
+.kanban-column {
+    transition: background-color 0.3s;
+}
+
+.kanban-card {
+    cursor: grab;
+}
+
+.kanban-card:active {
+    cursor: grabbing;
+}
+
+.sortable-ghost {
+    opacity: 0.4;
+    background-color: #e9ecef !important;
+}
+
+.reminder-card {
+    transition: border-color 0.3s ease, transform 0.2s ease;
+}
+
+.reminder-card:hover {
+    border-color: var(--bs-primary) !important;
+    transform: translateY(-2px);
+}
+
+.selected-task-row {
+    background-color: rgba(99, 102, 241, 0.05) !important;
+    border-left: 5px solid var(--bs-primary) !important;
+    cursor: pointer;
+}

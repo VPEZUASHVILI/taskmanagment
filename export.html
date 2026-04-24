@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <title>ექსპორტი - Asana Lite</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="export">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4 shadow-sm">
+        <div class="container-fluid px-4">
+            <button class="btn btn-link text-white me-2 p-0 border-0 shadow-none" onclick="toggleSidebar()" title="მენიუს გადართვა">
+                <i class="bi bi-list fs-3"></i>
+            </button>
+            <a class="navbar-brand fw-bold" href="#">📊 Asana Lite</a>
+            <div class="d-flex align-items-center">
+                <div class="position-relative me-3" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#notificationModal" title="შეტყობინებები">
+                    <i class="bi bi-bell-fill text-white fs-4"></i>
+                    <span id="notificationBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">
+                        0
+                    </span>
+                </div>
+                <div class="form-check form-switch text-white me-4 d-none d-lg-block">
+                    <input class="form-check-input" type="checkbox" id="darkModeToggle" onclick="toggleDarkMode()">
+                    <label class="form-check-label small" for="darkModeToggle">მუქი რეჟიმი</label>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-outline-light btn-sm dropdown-toggle border-0 d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown">
+                        <img id="userAvatar" src="" class="rounded-circle d-none border border-white" width="24" height="24" style="object-fit: cover;">
+                        <i id="userIcon" class="bi bi-person-circle"></i> <span id="userNameDisplay">პროფილი</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end shadow">
+                        <li><a class="dropdown-item small" href="#" data-bs-toggle="modal" data-bs-target="#userSettingsModal"><i class="bi bi-gear"></i> პარამეტრები</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item small text-danger" href="/auth/logout"><i class="bi bi-box-arrow-right"></i> გამოსვლა</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid px-2 main-content">
+        <div class="row mt-4">
+            <div id="sidebarColumn" class="col-md-2 col-lg-1 mb-4">
+                <div class="d-grid gap-2 sticky-top" style="top: 20px;">
+                    <button class="btn btn-success shadow-sm py-2 sidebar-btn px-1" data-bs-toggle="modal" data-bs-target="#addTaskModal">
+                        <i class="bi bi-plus-circle d-block mb-1 fs-6"></i> <span style="font-size: 0.7rem;">დამატება</span>
+                    </button>
+                    <a href="/" class="btn btn-outline-primary shadow-sm py-2 sidebar-btn px-1">
+                        <i class="bi bi-house-door d-block mb-1 fs-6"></i> <span style="font-size: 0.7rem;">მთავარი</span>
+                    </a>
+                    <a href="/kanban" class="btn btn-outline-warning shadow-sm py-2 sidebar-btn px-1">
+                        <i class="bi bi-columns-gap d-block mb-1 fs-6"></i> <span style="font-size: 0.7rem;">კანბანი</span>
+                    </a>
+                    <a href="/stats" class="btn btn-outline-secondary shadow-sm py-2 sidebar-btn px-1">
+                        <i class="bi bi-bar-chart d-block mb-1 fs-6"></i> <span style="font-size: 0.7rem;">სტატისტიკა</span>
+                    </a>
+                    <a href="/export-page" class="btn btn-info shadow-sm py-2 sidebar-btn active px-1">
+                        <i class="bi bi-file-earmark-excel d-block mb-1 fs-6"></i> <span style="font-size: 0.7rem;">ექსპორტი</span>
+                    </a>
+                </div>
+            </div>
+            <div id="contentColumn" class="col-md-10 col-lg-11">
+                <h3 class="mb-4 text-secondary fw-light">მონაცემების ექსპორტი</h3>
+                <div class="card shadow-sm p-4 text-center">
+                    <h5 class="mb-3">დააჭირეთ ღილაკს მონაცემების Excel-ში ექსპორტისთვის</h5>
+                    <button onclick="exportData()" class="btn btn-primary w-50 mx-auto py-3">
+                        <i class="bi bi-file-earmark-excel me-2"></i> ექსპორტი Excel-ში
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ნოტიფიკაციების მოდალი -->
+    <div class="modal fade" id="notificationModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">შეტყობინებების ისტორია</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <div id="notificationList" class="list-group list-group-flush"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- პარამეტრების მოდალი -->
+    <div class="modal fade" id="userSettingsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-sm shadow-lg">
+            <div class="modal-content border-0">
+                <div class="modal-header bg-dark text-white py-2">
+                    <h6 class="modal-title small fw-bold">პროფილის პარამეტრები</h6>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="userSettingsForm">
+                        <div class="mb-2">
+                            <label class="form-label small text-secondary fw-bold">ახალი სახელი</label>
+                            <input type="text" id="newUsername" class="form-control form-control-sm" required>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label small text-secondary fw-bold">პროფილის სურათი</label>
+                            <input type="file" id="newAvatar" class="form-control form-control-sm" accept="image/*">
+                        </div>
+                        <hr class="my-3">
+                        <div class="mb-2">
+                            <label class="form-label small text-secondary fw-bold">ძველი პაროლი</label>
+                            <input type="password" id="oldPassword" class="form-control form-control-sm" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small text-secondary fw-bold">ახალი პაროლი</label>
+                            <input type="password" id="newPassword" class="form-control form-control-sm" required>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-sm rounded-pill">შენახვა</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

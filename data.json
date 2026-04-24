@@ -1,0 +1,40 @@
+{
+  "employees": [
+    {
+      "name": "ვახო ",
+      "position": "აიტი"
+    },
+    {
+      "name": "ვახო",
+      "position": "აიტი"
+    }
+  ],
+  "tasks": [
+    {
+      "id": 5,
+      "title": "მოთხოვნილია ლეპტოპი",
+      "deadline": "2026-04-24",
+      "assignee": "ვახო ",
+      "priority": "High",
+      "client": "დამკვეთი 1 ",
+      "requirements": "გამზადება",
+      "comment": "დომეინ იუზერი Outlook",
+      "status": "Done",
+      "reminderTime": null
+    },
+    {
+      "id": 6,
+      "title": "test1",
+      "deadline": "2026-04-24",
+      "assignee": "ვახო ",
+      "priority": "Medium",
+      "client": "test2",
+      "requirements": "test3",
+      "comment": "oop",
+      "status": "Done",
+      "reminderTime": null
+    }
+  ],
+  "taskIdCounter": 7,
+  "notifications": []
+}
